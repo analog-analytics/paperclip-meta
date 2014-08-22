@@ -32,8 +32,11 @@ module Paperclip
           style ? read_meta(style, :size) : size_without_meta_data
         end
 
-        def fingerprint_with_meta_data(style = nil)
-          read_meta(style || :original, :fingerprint)
+        def fingerprint_with_meta_data(style = :original)
+          fingerprint = fingerprint_without_meta_data if style == :original
+          return fingerprint if fingerprint
+
+          read_meta(style, :fingerprint)
         end
 
         def height(style = default_style)

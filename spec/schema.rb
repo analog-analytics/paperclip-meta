@@ -10,6 +10,7 @@ ActiveRecord::Schema.define do
     t.string  :big_image_content_type
     t.integer :big_image_updated_at
     t.integer :big_image_file_size
+    t.string  :big_image_fingerprint
     t.string  :big_image_meta
   end
 end

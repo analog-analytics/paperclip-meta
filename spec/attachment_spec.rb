@@ -69,6 +69,15 @@ describe "Attachment" do
       fingerprint = fingerprint_for(path)
       assert_equal fingerprint, image.big_image.fingerprint(:thumb)
     end
+
+    it 'favor use of #{image_name}_fingerprint for original image' do
+      image = Image.create(big_image: big_image)
+      image.update_attribute(:big_image_meta, nil)
+      path = File.join(File.dirname(__FILE__), "tmp/fixtures/tmp/original/#{image.id}.jpg")
+      fingerprint = fingerprint_for(path)
+      assert_nil image.big_image_meta
+      assert_equal fingerprint, image.big_image.fingerprint
+    end
   end
 
   it "clears geometry fields when image is destroyed" do
