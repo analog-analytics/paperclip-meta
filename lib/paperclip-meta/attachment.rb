@@ -21,7 +21,11 @@ module Paperclip
           post_process_styles_without_meta_data(*styles)
           return unless instance.respond_to?(:"#{name}_meta=")
 
-          meta = populate_meta(@queued_for_write)
+          process_meta_for_styles(@queued_for_write)
+        end
+
+        def process_meta_for_styles(queue)
+          meta = populate_meta(queue)
           return if meta == {}
 
           write_meta(meta)
@@ -51,6 +55,15 @@ module Paperclip
         # return dimesions for default_style.
         def image_size(style = default_style)
           "#{width(style)}x#{height(style)}"
+        end
+
+        # Helper method to return a read only version of the meta hash for
+        # the instance
+        #
+        def meta_data
+          if instance.respond_to?(:"#{name}_meta") && instance_read(:meta)
+            meta_decode(instance_read(:meta)).freeze
+          end
         end
 
         private
