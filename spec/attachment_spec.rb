@@ -68,6 +68,7 @@ describe "Attachment" do
       path = File.join(File.dirname(__FILE__), "tmp/fixtures/tmp/thumb/#{image.id}.jpg")
       fingerprint = fingerprint_for(path)
       assert_equal fingerprint, image.big_image.fingerprint(:thumb)
+      assert_equal fingerprint, image.big_image.fingerprint('thumb')
     end
 
     it 'favor use of #{image_name}_fingerprint for original image' do

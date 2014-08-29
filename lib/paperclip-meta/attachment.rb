@@ -40,7 +40,7 @@ module Paperclip
           fingerprint = fingerprint_without_meta_data if style == :original
           return fingerprint if fingerprint
 
-          read_meta(style, :fingerprint)
+          read_meta(style.to_sym, :fingerprint)
         end
 
         def height(style = default_style)
