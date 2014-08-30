@@ -78,6 +78,7 @@ describe "Attachment" do
       fingerprint = fingerprint_for(path)
       assert_nil image.big_image_meta
       assert_equal fingerprint, image.big_image.fingerprint
+      assert_equal fingerprint, image.big_image.fingerprint(nil)
     end
   end
 
