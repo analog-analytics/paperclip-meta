@@ -37,7 +37,7 @@ module Paperclip
         end
 
         def fingerprint_with_meta_data(style = :original)
-          fingerprint = fingerprint_without_meta_data if style == :original
+          fingerprint = fingerprint_without_meta_data if style == nil || style == :original
           return fingerprint if fingerprint
 
           read_meta(style.to_sym, :fingerprint)
